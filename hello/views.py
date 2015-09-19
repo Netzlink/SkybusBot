@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from telegram import Update
+import json
 from .models import Greeting
 
 # Create your views here.
@@ -12,10 +13,13 @@ def index(request):
 
 def telegram_callback(request):
     if request.method == 'POST':
-        print(request.body)
+        update = Update(**json.loads(request.body))
+        _parse_update(update)
         return HttpResponse('OK')
-    if request.method == 'GET':
-        return HttpResponse('GET')
+
+
+def _parse_update(update):
+    print(update)
 
 def db(request):
 
