@@ -21,11 +21,11 @@ def telegram_callback(request):
 
 def _parse_update(update):
     print(update)
-    message = telegram.Message(chat=update.message['chat'],
-                               message_id=update.message['message_id'],
-                               from_user=update.message['from'],
-                               date=update.message['date'])
-    print(message)
+    # message = telegram.Message(chat=update.message['chat'],
+    #                            message_id=update.message['message_id'],
+    #                            from_user=update.message['from'],
+    #                            date=update.message['date'])
+    # print(message)
     # print("Hallo %s" % message.from_user)
 
 def db(request):
