@@ -9,6 +9,14 @@ def index(request):
     # return render(request, 'index.html')
     return HttpResponse('Hallo')
 
+
+def telegram_callback(request):
+    if request.method == 'POST':
+        print(request.body)
+        return HttpResponse('OK')
+    if request.method == 'GET':
+        return HttpResponse('GET')
+
 def db(request):
 
     greeting = Greeting()
