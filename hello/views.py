@@ -34,7 +34,23 @@ def _parse_update(update):
     print(message)
     print("Hallo %s!" % message.from_user['username'])
     print("Dein command war: %s" % message.text)
-    bot.sendMessage(chat_id=message.chat['id'], text=message.text)
+    # bot.sendMessage(chat_id=message.chat['id'], text=message.text)
+    parse_command(message)
+
+
+def parse_command(message):
+    raum = 'test'
+    temperature = '12 C'
+    command = message.text.split()
+    if(command[0]=='/reg'):
+        bot.sendMessage(chat_id=message.chat['id'], text=" %s wurde mit %s verbunden" % (command[1], message.from_user['username']))
+    if(message.text=='/hallo'):
+        bot.sendMessage(chat_id=message.chat['id'], text="hallo %s!" % message.from_user['username'])
+    if(message.text=='/temperature'or message.text=='/Temperature'):
+        bot.sendMessage(chat_id=message.chat['id'], text="Temperature im Raum %s ist: %s" % ('test', temperature))
+    if(message.text=='/wobinich'):
+        bot.sendMessage(chat_id=message.chat['id'], text="Du bist im Raum %s" % raum)
+
 
 def db(request):
 
