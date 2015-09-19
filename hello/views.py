@@ -13,20 +13,23 @@ def index(request):
 
 def telegram_callback(request):
     if request.method == 'POST':
+        update = telegram.Update(**json.loads(request.body))
         print(request.body)
-        update = telegram.Update.de_json(request.body)
         _parse_update(update)
         return HttpResponse('OK')
 
 
 def _parse_update(update):
     print(update)
+    date = telegram.Message._fromtimestamp(update.message['date'])
     message = telegram.Message(chat=update.message['chat'],
                                message_id=update.message['message_id'],
                                from_user=update.message['from'],
-                               date=update.message['date'])
+                               date=date,
+                               text=update.message['text'])
     print(message)
-    # print("Hallo %s" % message.from_user)
+    print("Hallo %s!" % message.from_user['username'])
+    print("Dein command war: %s" % message.text)
 
 def db(request):
 
