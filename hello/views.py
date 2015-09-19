@@ -25,7 +25,7 @@ def _parse_update(update):
     message = telegram.Message(chat=update.message['chat'],
                                message_id=update.message['message_id'],
                                from_user=update.message['from'],
-                               date=datetime.datetime.now())
+                               date=datetime.time())
     print(message)
     print("Hallo %s" % message.from_user)
 
