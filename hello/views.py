@@ -5,8 +5,8 @@ import telegram
 import datetime
 from .models import Greeting
 
-adrian = {'uii':'3000E20020648118011918005ACC', 'telegram':'17138029'}
-cor = {'uii':'3000E20020648118011914807DAC', 'telegram': '103683331'}
+adrian = {'uii':'3000E20020648118011918005ACC', 'telegram': '17138029', 'username': 'AdrainSo'}
+cor = {'uii':'3000E20020648118011914807DAC', 'telegram': '103683331', 'username': 'sirmonkey'}
 
 users = [adrian, cor]
 bot = telegram.Bot(token='131813402:AAFrMB1-B7wZisSSavAwKSOIKVN3w6VcRMA')
@@ -59,7 +59,10 @@ def parse_command(message):
     temperature = '12 C'
     command = message.text.split()
     if(command[0]=='/reg'):
-        bot.sendMessage(chat_id=message.chat['id'], text=" %s wurde mit %s verbunden" % (command[1], message.from_user['username']))
+        for user in users:
+            if user['username'] == message.from_user['username']:
+                user['uii'] = command[1]
+                bot.sendMessage(chat_id=message.chat['id'], text=" %s wurde mit %s verbunden" % (command[1], message.from_user['username']))
     if(message.text=='/hallo'):
         bot.sendMessage(chat_id=message.chat['id'], text="hallo %s!" % message.from_user['username'])
     if(message.text=='/temperature'or message.text=='/Temperature'):
