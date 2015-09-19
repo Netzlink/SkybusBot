@@ -37,6 +37,10 @@ def _parse_update(update):
     # bot.sendMessage(chat_id=message.chat['id'], text=message.text)
     parse_command(message)
 
+def update_location(request):
+    if request.method == 'POST':
+        print(request.body)
+        return HttpResponse('OK')
 
 def parse_command(message):
     raum = 'test'
