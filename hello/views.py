@@ -5,8 +5,11 @@ import telegram
 import datetime
 from .models import Greeting
 
+adrian = {'uii':'3000E20020648118011918005ACC', 'telegram':'17138029'}
+cor = {'uii':'3000E20020648118011914807DAC', 'telegram': ''}
 
 bot = telegram.Bot(token='131813402:AAFrMB1-B7wZisSSavAwKSOIKVN3w6VcRMA')
+
 
 # Create your views here.
 def index(request):
@@ -39,6 +42,15 @@ def _parse_update(update):
 
 def update_location(request):
     if request.method == 'POST':
+        loaded = json.loads(request.body)
+        scan = loaded['scan'][0]
+        print(scan)
+        if scan and scan['uii'] in [cor['uii'], adrian['uii']]:
+            if loaded['device_name'] == 'fridge':
+                if scan['uii'] == cor['uii']:
+                    bot.sendMessage(chat_id=cor['telegram'], text='Weg Weg! Mein Essen!')
+                if scan['uii'] == adrian['uii']:
+                    bot.sendMessage(chat_id=adrian['telegram'], text='Weg Weg! Mein Essen!')
         print(request.body)
         return HttpResponse('OK')
 
