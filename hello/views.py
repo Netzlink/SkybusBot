@@ -5,6 +5,9 @@ import telegram
 import datetime
 from .models import Greeting
 
+
+bot = telegram.Bot(token='131813402:AAFrMB1-B7wZisSSavAwKSOIKVN3w6VcRMA')
+
 # Create your views here.
 def index(request):
     # return HttpResponse('Hello from Python!')
@@ -31,7 +34,7 @@ def _parse_update(update):
     print(message)
     print("Hallo %s!" % message.from_user['username'])
     print("Dein command war: %s" % message.text)
-
+    bot.sendMessage(chat_id=message.chat['id'],message.text)
 
 def db(request):
 
