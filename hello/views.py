@@ -6,8 +6,9 @@ import datetime
 from .models import Greeting
 
 adrian = {'uii':'3000E20020648118011918005ACC', 'telegram':'17138029'}
-cor = {'uii':'3000E20020648118011914807DAC', 'telegram': ''}
+cor = {'uii':'3000E20020648118011914807DAC', 'telegram': '103683331'}
 
+users = [adrian, cor]
 bot = telegram.Bot(token='131813402:AAFrMB1-B7wZisSSavAwKSOIKVN3w6VcRMA')
 
 
@@ -43,15 +44,14 @@ def _parse_update(update):
 def update_location(request):
     if request.method == 'POST':
         loaded = json.loads(request.body)
-        scan = loaded['scan'][0]
-        print(scan)
-        if scan and scan['uii'] in [cor['uii'], adrian['uii']]:
-            if loaded['device_name'] == 'fridge':
-                if scan['uii'] == cor['uii']:
-                    bot.sendMessage(chat_id=cor['telegram'], text='Weg Weg! Mein Essen!')
-                if scan['uii'] == adrian['uii']:
-                    bot.sendMessage(chat_id=adrian['telegram'], text='Weg Weg! Mein Essen!')
-        print(request.body)
+        print(loaded)
+        for user in users:
+            if user['uii'] == loaded['tag']:
+                    if loaded['incoming']:
+                        txt = 'Weg Weg! Von %s!' % loaded['location']
+                    else:
+                        txt = 'Danke! Kommt nie wieder!'
+                    bot.sendMessage(chat_id=user['telegram'], text=txt)
         return HttpResponse('OK')
 
 def parse_command(message):
