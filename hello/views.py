@@ -15,7 +15,7 @@ def index(request):
 def telegram_callback(request):
     if request.method == 'POST':
         print(request.body)
-        update = telegram.Update.de_json(request.body)
+        update = telegram.Update(request.body)
         _parse_update(update)
         return HttpResponse('OK')
 
