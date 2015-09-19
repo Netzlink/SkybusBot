@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import json
 import telegram
+import datetime
 from .models import Greeting
 
 # Create your views here.
@@ -21,12 +22,12 @@ def telegram_callback(request):
 
 def _parse_update(update):
     print(update)
-    # message = telegram.Message(chat=update.message['chat'],
-    #                            message_id=update.message['message_id'],
-    #                            from_user=update.message['from'],
-    #                            date=update.message['date'])
-    # print(message)
-    # print("Hallo %s" % message.from_user)
+    message = telegram.Message(chat=update.message['chat'],
+                               message_id=update.message['message_id'],
+                               from_user=update.message['from'],
+                               date=datetime.datetime.now())
+    print(message)
+    print("Hallo %s" % message.from_user)
 
 def db(request):
 
