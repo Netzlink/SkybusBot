@@ -48,7 +48,7 @@ def parse_command(message):
         bot.sendMessage(chat_id=message.chat['id'], text="hallo %s!" % message.from_user['username'])
     if(message.text=='/temperature'or message.text=='/Temperature'):
         bot.sendMessage(chat_id=message.chat['id'], text="Temperature im Raum %s ist: %s" % ('test', temperature))
-    if(message.text=='/wobinich'):
+    if(message.text=='/whereami'):
         bot.sendMessage(chat_id=message.chat['id'], text="Du bist im Raum %s" % raum)
 
 
