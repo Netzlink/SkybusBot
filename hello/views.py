@@ -55,8 +55,8 @@ def update_location(request):
         return HttpResponse('OK')
 
 def parse_command(message):
-    raum = 'test'
-    temperature = '12 C'
+    raum = 'Saal'
+    temperature = '19 C'
     command = message.text.split()
     if(command[0]=='/reg'):
         bot.sendMessage(chat_id=message.chat['id'], text=" %s wurde mit %s verbunden" % (command[1], message.from_user['username']))
